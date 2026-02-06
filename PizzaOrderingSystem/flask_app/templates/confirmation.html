@@ -1,0 +1,15 @@
+<h1>Your Order is Confirmed!</h1>
+
+<p>Thank you for ordering from us, {{ order.name }}.</p>
+
+<h3>Confirmation Number: {{ order.id }}</h3>
+
+<h3>Order Time: 
+    {{ order.timestamp.strftime("%I:%M %p %m-%d-%Y") }}
+</h3>
+
+<h3>Total Charged: ${{ "%.2f"|format(order.total) }}</h3>
+
+<h3>Card Used: **** **** **** {{ order.card }}</h3>
+
+<a href="/">Return Home</a>
