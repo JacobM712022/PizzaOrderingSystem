@@ -1,8 +1,25 @@
+<div style="
+    background: #0D47A1;
+    padding: 10px 15px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    color: white;
+    text-align: left;
+">
+    {% if session.get("user") %}
+        Welcome, {{ session.get("user") }} |
+        <a href="/logout" style="color:white; text-decoration:none;">Logout</a>
+    {% else %}
+        <a href="/login" style="color:white; text-decoration:none; margin-right:10px;">Login</a>
+        <a href="/create_account" style="color:white; text-decoration:none;">Create Account</a>
+    {% endif %}
+</div>
+
 <h1>Welcome to Colorado Pizza!</h1>
-<div style="text-align: center; margin-top: 20px;">
+<div style="text-align: left; margin-top: 20px;">
     <img src="{{ url_for('static', filename='ColoradoPizzaLogo.png') }}" 
          alt="Colorado Pizza Logo"
-         style="width: 200px; height: auto;">
+         style="width: 400px; height: auto;">
 </div>
 
 <nav style="
@@ -14,6 +31,5 @@
     <a href="/" style="color:white; margin-right:20px; text-decoration:none;">Home</a>
     <a href="/menu" style="color:white; margin-right:20px; text-decoration:none;">View Menu</a>
     <a href="/promotions" style="color:white; margin-right:20px; text-decoration:none;">Current Promotions</a>
-    <a href="/login" style="color:white; margin-right:20px; text-decoration:none;">Login/Create Account</a>
     <a href="/admin" style="color:white; text-decoration:none;">Admin Login</a>
 </nav>
