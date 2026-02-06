@@ -1,11 +1,19 @@
 <h1>Welcome to Colorado Pizza!</h1>
+<div style="text-align: center; margin-top: 20px;">
+    <img src="{{ url_for('static', filename='ColoradoPizzaLogo.png') }}" 
+         alt="Colorado Pizza Logo"
+         style="width: 200px; height: auto;">
+</div>
 
 <nav style="
     background: #d32f2f;
-    padding: 10px;
+    padding: 12px;
     border-radius: 6px;
+    margin-bottom: 25px;
 ">
     <a href="/" style="color:white; margin-right:20px; text-decoration:none;">Home</a>
     <a href="/menu" style="color:white; margin-right:20px; text-decoration:none;">View Menu</a>
+    <a href="/promotions" style="color:white; margin-right:20px; text-decoration:none;">Current Promotions</a>
+    <a href="/login" style="color:white; margin-right:20px; text-decoration:none;">Login/Create Account</a>
     <a href="/admin" style="color:white; text-decoration:none;">Admin Login</a>
 </nav>

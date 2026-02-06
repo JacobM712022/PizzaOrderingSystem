@@ -15,18 +15,81 @@
         {% set subtotal = item.price * item.qty %}
         {% set ns.total = ns.total + subtotal %}
 
-        <tr>
-            <td>{{ item.name }}</td>
-            <td>{{ item.qty }}</td>
-            <td>${{ "%.2f"|format(item.price) }}</td>
-            <td>${{ "%.2f"|format(subtotal) }}</td>
-        </tr>
+<tr>
+
+    <!-- Update form -->
+    <form action="/update_cart" method="POST" style="display: contents;">
+        <input type="hidden" name="id" value="{{ item.id }}">
+
+        <td>
+            {{ item.name }}
+            {% if item.size %}
+                <br>
+                <select name="size">
+                    <option value="small"  {% if item.size == "small" %}selected{% endif %}>Small</option>
+                    <option value="medium" {% if item.size == "medium" %}selected{% endif %}>Medium</option>
+                    <option value="large"  {% if item.size == "large" %}selected{% endif %}>Large</option>
+                </select>
+            {% endif %}
+        </td>
+
+        <td>
+            <input type="number" name="qty" value="{{ item.qty }}" min="1" style="width: 50px;">
+        </td>
+
+        <td>${{ "%.2f"|format(item.price) }}</td>
+        <td>${{ "%.2f"|format(subtotal) }}</td>
+
+        <td>
+            <button type="submit" style="padding: 5px 10px;">Update</button>
+        </td>
+    </form>
+
+    <!-- Remove form (NOT nested) -->
+    <td>
+        <form action="/remove_from_cart" method="POST" style="display:inline;">
+            <input type="hidden" name="id" value="{{ item.id }}">
+            <button type="submit" style="padding: 5px 10px; background:#d32f2f; color:white; border:none; border-radius:4px;">
+                Remove
+            </button>
+        </form>
+    </td>
+
+</tr>
     {% endfor %}
 </table>
 
 <h3>Total: ${{ "%.2f"|format(ns.total) }}</h3>
 
-<a href="/checkout">Proceed to Checkout</a>
+<div style="display: flex; gap: 12px; margin-top: 20px;">
+
+    <!-- Add More button -->
+    <a href="/menu" 
+       style="
+           background: #1976d2;
+           color: white;
+           padding: 10px 18px;
+           border-radius: 6px;
+           text-decoration: none;
+           font-weight: bold;
+       ">
+       Add More?
+    </a>
+
+    <!-- Proceed to Checkout button -->
+    <a href="/checkout" 
+       style="
+           background: #388e3c;
+           color: white;
+           padding: 10px 18px;
+           border-radius: 6px;
+           text-decoration: none;
+           font-weight: bold;
+       ">
+       Proceed to Checkout
+    </a>
+
+</div>
 
 {% else %}
 <p>Your cart is empty.</p>
