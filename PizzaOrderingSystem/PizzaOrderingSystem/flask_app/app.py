@@ -176,6 +176,23 @@ def edit_item(item_id):
 
     return render_template("admin_edit_item.html", item=item)
 
+@app.route("/admin/delete_item/<int:item_id>", methods=["GET", "POST"])
+def delete_item(item_id):
+    if not session.get("admin"):
+        return redirect("/admin")
+
+    item = menu.get(item_id)
+    if not item:
+        return "Item not found"
+
+    # If user confirms deletion
+    if request.method == "POST":
+        menu.pop(item_id, None)
+        return redirect("/manage_menu")
+
+    # Show confirmation page
+    return render_template("admin_delete_item.html", item=item)
+
 @app.route("/menu")
 def show_menu():
     return render_template(
