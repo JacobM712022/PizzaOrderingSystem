@@ -1,0 +1,74 @@
+<!-- 3‑COLUMN GRID WRAPPER -->
+<div style="
+    display: grid;
+    grid-template-columns: 1fr 900px 1fr;
+    gap: 20px;
+    align-items: start;
+">
+
+    <!-- LEFT IMAGE -->
+    <div>
+        <img src="{{ url_for('static', filename='CO_Pizza_Flag.png') }}"
+             style="width:100%; border-radius:10px; opacity:0.85;">
+    </div>
+
+    <!-- CENTER COLUMN -->
+    <div style="text-align:center; max-width:900px; margin:0 auto;">
+
+        <!-- LOGIN BAR -->
+        <div style="
+            background: #0D47A1;
+            padding: 10px 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            color: white;
+            text-align: center;
+            font-family: Anton, sans-serif;
+            font-size: 20px;
+        ">
+            {% if session.get("user") %}
+                Welcome, {{ session.get("user") }} |
+                <a href="/profile" style="color:white; text-decoration:none; margin:0 10px;">My Profile</a> |
+                <a href="/logout" style="color:white; text-decoration:none;">Logout</a>
+            {% else %}
+                <a href="/login" style="color:white; text-decoration:none; margin-right:10px;">Login</a>
+                <a href="/create_account" style="color:white; text-decoration:none;">Create Account</a>
+            {% endif %}
+        </div>
+
+        <!-- NAVIGATION BAR -->
+        <nav style="
+            background: #d32f2f;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            font-family: Anton, sans-serif;
+            font-size: 20px;
+        ">
+            <a href="/" style="color:white; margin-right:20px; text-decoration:none;">Home</a>
+            <a href="/menu" style="color:white; margin-right:20px; text-decoration:none;">View Menu</a>
+            <a href="/promotions" style="color:white; margin-right:20px; text-decoration:none;">Current Promotions</a>
+            <a href="/admin" style="color:white; text-decoration:none;">Admin Login</a>
+        </nav>
+
+        <!-- HEADER -->
+        <h1 style="font-family: 'Anton', sans-serif; font-size: 48px; font-weight: 900;">
+            Welcome to Colorado Pizza!
+        </h1>
+
+        <!-- LOGO -->
+        <div style="margin-top: 20px;">
+            <img src="{{ url_for('static', filename='ColoradoPizzaLogo.png') }}"
+                 alt="Colorado Pizza Logo"
+                 style="width: 900px; height: auto;">
+        </div>
+
+    </div>
+
+    <!-- RIGHT IMAGE -->
+    <div>
+        <img src="{{ url_for('static', filename='CO_Pizza_Flag.png') }}"
+             style="width:100%; border-radius:10px; opacity:0.85;">
+    </div>
+
+</div>

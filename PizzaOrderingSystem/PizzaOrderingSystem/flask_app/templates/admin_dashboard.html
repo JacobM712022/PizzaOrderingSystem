@@ -1,0 +1,60 @@
+<div style="
+    max-width:800px;
+    margin:0 auto;
+    text-align:center;
+    font-family:'Anton', sans-serif;
+">
+
+    <h1 style="font-size:48px; font-weight:600; margin-bottom:20px;">
+        Admin Dashboard
+    </h1>
+
+    <p style="font-size:24px; margin-bottom:30px;">
+        Welcome, Admin! Choose an action below.
+    </p>
+
+    <div style="display:flex; justify-content:center; gap:20px; margin-bottom:40px;">
+
+        <a href="/manage_menu" style="
+            background:#1976d2;
+            color:white;
+            padding:16px 28px;
+            border-radius:10px;
+            text-decoration:none;
+            font-size:24px;
+        ">
+            Manage Menu Items
+        </a>
+
+        <a href="/manage_promotions" style="
+            background:#388e3c;
+            color:white;
+            padding:16px 28px;
+            border-radius:10px;
+            text-decoration:none;
+            font-size:24px;
+        ">
+            Manage Promotions
+        </a>
+
+    </div>
+
+    <a href="/" style="
+        display:inline-block;
+        background:#d32f2f;
+        color:white;
+        padding:12px 24px;
+        border-radius:10px;
+        text-decoration:none;
+        font-size:22px;
+    ">
+        Return Home
+    </a>
+
+    <div style="margin-top:30px;">
+        <img src="{{ url_for('static', filename='ColoradoPizzaLogo.png') }}"
+             alt="Colorado Pizza Logo"
+             style="width:300px; height:auto;">
+    </div>
+
+</div>

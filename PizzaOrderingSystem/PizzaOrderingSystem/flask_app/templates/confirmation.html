@@ -1,0 +1,51 @@
+<div style="max-width:700px; margin:0 auto; text-align:center; font-family:'Anton', sans-serif;">
+
+    <h1 style="font-size:48px; font-weight:700; margin-bottom:20px;">
+        Your Order is Confirmed!
+    </h1>
+
+    <p style="font-size:24px; margin-bottom:25px;">
+        Thank you for ordering from us, {{ order.name }}.
+    </p>
+
+    <div style="
+        border:4px solid #0D47A1;
+        border-radius:12px;
+        padding:20px;
+        background:white;
+        font-size:22px;
+        line-height:1.6;
+        margin-bottom:30px;
+    ">
+        <h3 style="margin:10px 0;">Confirmation Number: {{ order.id }}</h3>
+
+        <h3 style="margin:10px 0;">
+            Order Time: {{ order.timestamp.strftime("%I:%M %p %m-%d-%Y") }}
+        </h3>
+
+        <h3 style="margin:10px 0;">
+            Total Charged: ${{ "%.2f"|format(order.total) }}
+        </h3>
+
+        <h3 style="margin:10px 0;">
+            Card Used: **** **** **** {{ order.last4 }}
+        </h3>
+    </div>
+
+    <a href="/" style="
+        display:inline-block;
+        background:#d32f2f;
+        color:white;
+        padding:12px 24px;
+        border-radius:10px;
+        text-decoration:none;
+        font-size:24px;
+    ">
+        Return Home
+    </a>
+    
+    <div style="margin-top:30px;">
+    <img src="{{ url_for('static', filename='ColoradoPizzaLogo.png') }}"
+         alt="Colorado Pizza Logo"
+         style="width:500px; height:auto;">
+</div>

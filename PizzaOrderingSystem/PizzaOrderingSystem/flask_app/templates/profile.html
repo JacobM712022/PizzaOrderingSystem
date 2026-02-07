@@ -1,0 +1,130 @@
+<div style="
+    max-width:800px;
+    margin:0 auto;
+    text-align:center;
+    font-family:'Anton', sans-serif;
+">
+
+    <h1 style="
+        font-size:48px;
+        font-weight:700;
+        margin-bottom:20px;
+    ">
+        My Profile
+    </h1>
+
+    <p style="font-size:24px; margin-bottom:25px;">
+        Welcome, {{ user.username }}!
+    </p>
+
+    <!-- Account Details Box -->
+    <div style="
+        border:4px solid #0D47A1;
+        border-radius:12px;
+        padding:20px;
+        background:white;
+        font-size:22px;
+        line-height:1.6;
+        margin-bottom:30px;
+        text-align:left;
+    ">
+        <h3 style="margin:10px 0; font-size:26px;">Account Details</h3>
+
+        <p><strong>Username:</strong> {{ user.username }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>First Name:</strong> {{ user.first_name }}</p>
+        <p><strong>Last Name:</strong> {{ user.last_name }}</p>
+
+        <h3 style="margin:20px 0 10px 0; font-size:26px;">Address</h3>
+
+        <p><strong>Street:</strong> {{ user.street }}</p>
+        <p><strong>City:</strong> {{ user.city }}</p>
+        <p><strong>State:</strong> {{ user.state }}</p>
+        <p><strong>Zip Code:</strong> {{ user.zip }}</p>
+    </div>
+
+    <!-- Buttons -->
+    <div style="display:flex; justify-content:center; gap:15px; margin-bottom:30px;">
+
+        <a href="/edit_profile" style="
+            background:#1976d2;
+            color:white;
+            padding:12px 20px;
+            border-radius:10px;
+            text-decoration:none;
+            font-size:22px;
+        ">
+            Edit Profile
+        </a>
+
+        <a href="/change_password" style="
+            background:#388e3c;
+            color:white;
+            padding:12px 20px;
+            border-radius:10px;
+            text-decoration:none;
+            font-size:22px;
+        ">
+            Change Password
+        </a>
+    </div>
+
+    <!-- Order History -->
+    <h2 style="font-size:36px; margin-bottom:15px;">Order History</h2>
+
+    {% if orders %}
+        <table border="1" cellpadding="8" cellspacing="0"
+               style="margin:0 auto; border-collapse:collapse; font-size:20px; width:100%; text-align:center;">
+            <tr style="background:#0D47A1; color:white; font-size:22px;">
+                <th>Order #</th>
+                <th>Date</th>
+                <th>Total</th>
+                <th>Action</th>
+            </tr>
+
+            {% for order in orders %}
+            <tr>
+                <td>{{ order.id }}</td>
+                <td>{{ order.timestamp.strftime("%m/%d/%Y %I:%M %p") }}</td>
+                <td>${{ "%.2f"|format(order.total) }}</td>
+                <td>
+                    <a href="/order/{{ order.id }}" style="
+                        background:#d32f2f;
+                        color:white;
+                        padding:6px 14px;
+                        border-radius:6px;
+                        text-decoration:none;
+                        font-size:18px;
+                    ">
+                        View
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p style="font-size:22px; margin-bottom:30px;">You have no past orders.</p>
+    {% endif %}
+
+    <!-- Return Home -->
+    <a href="/" style="
+        display:inline-block;
+        background:#d32f2f;
+        color:white;
+        padding:12px 24px;
+        border-radius:10px;
+        text-decoration:none;
+        font-size:24px;
+        margin-top:30px;
+    ">
+        Return Home
+    </a>
+
+    <!-- Logo -->
+    <div style="margin-top:30px;">
+        <img src="{{ url_for('static', filename='ColoradoPizzaLogo.png') }}"
+             alt="Colorado Pizza Logo"
+             style="width:300px; height:auto;">
+    </div>
+
+</div>

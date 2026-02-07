@@ -1,0 +1,47 @@
+<div style="
+    max-width:700px;
+    margin:0 auto;
+    text-align:center;
+    font-family:'Anton', sans-serif;
+">
+
+    <h1 style="
+        font-size:48px;
+        font-weight:700;
+        margin-bottom:20px;
+    ">
+        Admin Login
+    </h1>
+
+    <form method="POST" style="text-align:left; font-size:20px;">
+
+        <label>Admin Username:</label><br>
+        <input type="text" name="username" required
+               style="width:100%; padding:10px; border-radius:6px; border:2px solid #0D47A1; font-size:18px;"><br><br>
+
+        <label>Password:</label><br>
+        <input type="password" name="password" required
+               style="width:100%; padding:10px; border-radius:6px; border:2px solid #0D47A1; font-size:18px;"><br><br>
+
+        <button type="submit" style="
+            width:100%;
+            background:#d32f2f;
+            color:white;
+            padding:14px;
+            border:none;
+            border-radius:8px;
+            font-size:24px;
+            cursor:pointer;
+            margin-top:10px;
+        ">
+            Login as Admin
+        </button>
+    </form>
+
+    <div style="margin-top:30px;">
+        <img src="{{ url_for('static', filename='ColoradoPizzaLogo.png') }}"
+             alt="Colorado Pizza Logo"
+             style="width:300px; height:auto;">
+    </div>
+
+</div>

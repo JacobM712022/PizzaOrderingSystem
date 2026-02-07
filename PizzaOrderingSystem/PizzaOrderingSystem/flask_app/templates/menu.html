@@ -1,0 +1,226 @@
+<h1 style="
+    text-align:center;
+    font-family: 'Anton', sans-serif;
+    font-size: 48px;
+    margin-bottom: 30px;
+">
+    <a href="/" style="text-decoration:none; color:inherit;">Our Menu!</a>
+</h1>
+
+<div style="text-align:center; margin-top:10px; margin-bottom:25px;">
+    <a href="/cart" style="
+        display:inline-block;
+        background:#d32f2f;
+        color:white;
+        padding:12px 24px;
+        border-radius:10px;
+        font-family: 'Anton', sans-serif;
+        font-size:24px;
+        text-decoration:none;
+    ">
+        View Cart
+    </a>
+</div>
+
+<style>
+    .menu-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        padding: 20px;
+    }
+
+    .menu-column h2 {
+        text-align: center;
+        margin-bottom: 15px;
+        border-bottom: 2px solid #ccc;
+        padding-bottom: 5px;
+    }
+
+    .menu-item {
+        background: #f8f8f8;
+        padding: 12px;
+        margin-bottom: 12px;
+        border-radius: 6px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        list-style: none;
+    }
+</style>
+
+<div class="menu-grid">
+
+<!-- Column 1: Pizzas -->
+<div class="menu-column" style="
+    border: 4px solid #d32f2f;
+    border-radius: 10px;
+    padding: 20px;
+    background: white;
+">
+
+    <h2 style="
+        text-align:center;
+        font-family: 'Anton', sans-serif;
+        font-size: 32px;
+        color: #0D47A1;
+        border-bottom: 3px solid #d32f2f;
+        padding-bottom: 8px;
+        margin-bottom: 15px;
+    ">
+        Pizzas
+    </h2>
+
+    {% for item in menu.values() %}
+        {% if item.category == "pizza" %}
+            <div class="menu-item">
+
+                <strong>{{ item.name }}</strong> -
+
+                {% set discounted = apply_promotions(item, item.price) %}
+
+                {% if discounted < item.price %}
+                    <span style="text-decoration:line-through; color:#888;">
+                        ${{ "%.2f"|format(item.price) }}
+                    </span>
+                    <span style="color:#d32f2f; font-weight:bold;">
+                        ${{ "%.2f"|format(discounted) }}
+                    </span>
+                {% else %}
+                    ${{ "%.2f"|format(item.price) }}
+                {% endif %}
+                <br>
+
+                <em>{{ item.description }}</em><br><br>
+
+                <form action="/add_to_cart" method="POST">
+                    <input type="hidden" name="item_id" value="{{ item.id }}">
+
+                    <label>Size:</label>
+                    <select name="size">
+                        <option value="small">Small</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="large">Large</option>
+                    </select>
+                    <br><br>
+
+                    <label>Quantity:</label>
+                    <input type="number" name="qty" value="1" min="1">
+
+                    <button type="submit">Add to Cart</button>
+                </form>
+
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>
+
+<!-- Column 2: Sides & Desserts -->
+<div class="menu-column" style="
+    border: 4px solid #0D47A1;
+    border-radius: 10px;
+    padding: 20px;
+    background: white;
+">
+
+    <h2 style="
+        text-align:center;
+        font-family: 'Anton', sans-serif;
+        font-size: 32px;
+        color: #d32f2f;
+        border-bottom: 3px solid #0D47A1;
+        padding-bottom: 8px;
+        margin-bottom: 15px;
+    ">
+        Sides & Desserts
+    </h2>
+
+    {% for item in menu.values() %}
+        {% if item.category == "sides" or item.category == "dessert" %}
+            <div class="menu-item">
+
+                <strong>{{ item.name }}</strong> -
+
+                {% set discounted = apply_promotions(item, item.price) %}
+
+                {% if discounted < item.price %}
+                    <span style="text-decoration:line-through; color:#888;">
+                        ${{ "%.2f"|format(item.price) }}
+                    </span>
+                    <span style="color:#d32f2f; font-weight:bold;">
+                        ${{ "%.2f"|format(discounted) }}
+                    </span>
+                {% else %}
+                    ${{ "%.2f"|format(item.price) }}
+                {% endif %}
+                <br>
+
+                <em>{{ item.description }}</em><br><br>
+
+                <form action="/add_to_cart" method="POST">
+                    <input type="hidden" name="item_id" value="{{ item.id }}">
+
+                    <label>Quantity:</label>
+                    <input type="number" name="qty" value="1" min="1">
+
+                    <button type="submit">Add to Cart</button>
+                </form>
+
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>
+
+<!-- Column 3: Drinks -->
+<div class="menu-column" style="
+    border: 4px solid #d32f2f;
+    border-radius: 10px;
+    padding: 20px;
+    background: white;
+">
+
+    <h2 style="
+        text-align:center;
+        font-family: 'Anton', sans-serif;
+        font-size: 32px;
+        color: #0D47A1;
+        border-bottom: 3px solid #d32f2f;
+        padding-bottom: 8px;
+        margin-bottom: 15px;
+    ">
+        Drinks
+    </h2>
+
+    {% for item in menu.values() %}
+        {% if item.category == "drinks" %}
+            <div class="menu-item">
+
+                <strong>{{ item.name }}</strong> -
+
+                {% set discounted = apply_promotions(item, item.price) %}
+
+                {% if discounted < item.price %}
+                    <span style="text-decoration:line-through; color:#888;">
+                        ${{ "%.2f"|format(item.price) }}
+                    </span>
+                    <span style="color:#d32f2f; font-weight:bold;">
+                        ${{ "%.2f"|format(discounted) }}
+                    </span>
+                {% else %}
+                    ${{ "%.2f"|format(item.price) }}
+                {% endif %}
+                <br>
+
+                <em>{{ item.description }}</em><br><br>
+
+                <form action="/add_to_cart" method="POST">
+                    <input type="hidden" name="item_id" value="{{ item.id }}">
+
+                    <label>Quantity:</label>
+                    <input type="number" name="qty" value="1" min="1">
+
+                    <button type="submit">Add to Cart</button>
+                </form>
+
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>

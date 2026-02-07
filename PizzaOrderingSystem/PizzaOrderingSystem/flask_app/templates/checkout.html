@@ -1,0 +1,58 @@
+<div style="max-width:700px; margin:0 auto; text-align:center; font-family:'Anton', sans-serif;">
+
+    <h1 style="font-size:48px; font-weight:700; margin-bottom:25px;">
+        Checkout
+    </h1>
+
+    <form action="/checkout" method="POST" style="text-align:left; font-size:20px;">
+
+        <label>Name:</label><br>
+        <input type="text" name="name" required
+               style="width:100%; padding:10px; border-radius:6px; border:2px solid #0D47A1; font-size:18px;"><br><br>
+
+        <label>Address:</label><br>
+        <input type="text" name="address" required
+               style="width:100%; padding:10px; border-radius:6px; border:2px solid #0D47A1; font-size:18px;"><br><br>
+
+        <label>Card Number:</label><br>
+        <input type="text" name="card" required
+               style="width:100%; padding:10px; border-radius:6px; border:2px solid #0D47A1; font-size:18px;"><br><br>
+
+        <label>Expiration (MM/YY):</label><br>
+        <input type="text" name="exp" required
+               style="width:100%; padding:10px; border-radius:6px; border:2px solid #0D47A1; font-size:18px;"><br><br>
+
+        <label>CVV:</label><br>
+        <input type="text" name="cvv" required
+               style="width:100%; padding:10px; border-radius:6px; border:2px solid #0D47A1; font-size:18px;"><br><br>
+
+        <button type="submit" style="
+            width:100%;
+            background:#388e3c;
+            color:white;
+            padding:14px;
+            border:none;
+            border-radius:8px;
+            font-size:24px;
+            cursor:pointer;
+            margin-top:10px;
+        ">
+            Place Order
+        </button>
+    </form>
+
+    <div style="margin-top:25px;">
+        <a href="/cart" style="
+            display:inline-block;
+            background:#d32f2f;
+            color:white;
+            padding:12px 24px;
+            border-radius:8px;
+            text-decoration:none;
+            font-size:22px;
+        ">
+            Back to Cart
+        </a>
+    </div>
+
+</div>

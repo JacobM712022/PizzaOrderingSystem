@@ -1,0 +1,99 @@
+<div style="
+    max-width:900px;
+    margin:0 auto;
+    text-align:center;
+    font-family:'Anton', sans-serif;
+">
+
+    <h1 style="font-size:48px; font-weight:700; margin-bottom:20px;">
+        Manage Menu Items
+    </h1>
+
+    <p style="font-size:22px; margin-bottom:25px;">
+        Add, edit, or delete menu items below.
+    </p>
+
+    <!-- Add New Item Button -->
+    <div style="margin-bottom:25px;">
+        <a href="/admin/add_item" style="
+            background:#388e3c;
+            color:white;
+            padding:12px 24px;
+            border-radius:10px;
+            text-decoration:none;
+            font-size:22px;
+        ">
+            + Add New Item
+        </a>
+    </div>
+
+    <!-- Menu Items Table -->
+    <table border="1" cellpadding="8" cellspacing="0"
+           style="margin:0 auto; border-collapse:collapse; font-size:20px; width:100%; text-align:center;">
+        <tr style="background:#0D47A1; color:white; font-size:22px;">
+            <th>ID</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Active</th>
+            <th>Actions</th>
+        </tr>
+
+        {% for id, item in menu_items.items() %}
+        <tr>
+            <td>{{ item.id }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.category }}</td>
+            <td>${{ "%.2f"|format(item.price) }}</td>
+            <td>{{ "Yes" if item.active else "No" }}</td>
+            <td>
+                <a href="/admin/edit_item/{{ item.id }}" style="
+                    background:#1976d2;
+                    color:white;
+                    padding:6px 14px;
+                    border-radius:6px;
+                    text-decoration:none;
+                    font-size:18px;
+                ">
+                    Edit
+                </a>
+
+                <a href="/admin/delete_item/{{ item.id }}" style="
+                    background:#d32f2f;
+                    color:white;
+                    padding:6px 14px;
+                    border-radius:6px;
+                    text-decoration:none;
+                    font-size:18px;
+                    margin-left:8px;
+                ">
+                    Delete
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <!-- Return to Dashboard -->
+    <div style="margin-top:30px;">
+        <a href="/admin_dashboard" style="
+            display:inline-block;
+            background:#d32f2f;
+            color:white;
+            padding:12px 24px;
+            border-radius:10px;
+            text-decoration:none;
+            font-size:22px;
+        ">
+            Back to Admin Dashboard
+        </a>
+    </div>
+
+    <!-- Logo -->
+    <div style="margin-top:30px;">
+        <img src="{{ url_for('static', filename='ColoradoPizzaLogo.png') }}"
+             alt="Colorado Pizza Logo"
+             style="width:300px; height:auto;">
+    </div>
+
+</div>

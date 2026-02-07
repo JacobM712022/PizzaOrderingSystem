@@ -1,0 +1,125 @@
+<div style="max-width:900px; margin:0 auto; text-align:center; font-family:'Anton', sans-serif;">
+
+<h1 style="font-size: 48px; font-weight: 700; margin-bottom:20px;">
+    Your Cart
+</h1>
+
+{% if cart %}
+<table border="1" cellpadding="8" cellspacing="0" 
+       style="margin: 0 auto; border-collapse: collapse; font-size: 20px; width: 100%;">
+    <tr style="background:#0D47A1; color:white; font-size:22px; text-align:center;">
+        <th>Item</th>
+        <th>Qty</th>
+        <th>Price</th>
+        <th>Subtotal</th>
+    </tr>
+
+    {% set ns = namespace(total=0) %}
+
+    {% for item in cart %}
+        {% set subtotal = item.price * item.qty %}
+        {% set ns.total = ns.total + subtotal %}
+
+<tr>
+
+    <!-- Update form -->
+    <form action="/update_cart" method="POST" style="display: contents;">
+        <input type="hidden" name="id" value="{{ item.id }}">
+
+        <td>
+            {{ item.name }}
+            {% if item.size %}
+                <br>
+                <select name="size">
+                    <option value="small"  {% if item.size == "small" %}selected{% endif %}>Small</option>
+                    <option value="medium" {% if item.size == "medium" %}selected{% endif %}>Medium</option>
+                    <option value="large"  {% if item.size == "large" %}selected{% endif %}>Large</option>
+                </select>
+            {% endif %}
+        </td>
+
+        <td>
+            <input type="number" name="qty" value="{{ item.qty }}" min="1" style="width: 50px;">
+        </td>
+
+        <td>${{ "%.2f"|format(item.price) }}</td>
+        <td>${{ "%.2f"|format(subtotal) }}</td>
+
+        <td>
+            <button type="submit" style="
+                padding: 6px 14px;
+                background:#1976d2;
+                color:white;
+                border:none;
+                border-radius:6px;
+                font-family:'Anton', sans-serif;
+                font-size:16px;
+                cursor:pointer;
+            ">
+                Update
+            </button>
+        </td>
+    </form>
+
+    <!-- Remove form (NOT nested) -->
+    <td>
+        <form action="/remove_from_cart" method="POST" style="display:inline;">
+            <input type="hidden" name="id" value="{{ item.id }}">
+            <button type="submit" style="
+                padding: 6px 14px;
+                background:#d32f2f;
+                color:white;
+                border:none;
+                border-radius:6px;
+                font-family:'Anton', sans-serif;
+                font-size:16px;
+                cursor:pointer;
+            ">
+                Remove
+            </button>
+        </form>
+    </td>
+
+</tr>
+    {% endfor %}
+</table>
+
+<h3>Total: ${{ "%.2f"|format(ns.total) }}</h3>
+
+<div style="display: flex; gap: 12px; margin-top: 20px;">
+
+    <!-- Add More button -->
+    <a href="/menu" 
+       style="
+           background: #1976d2;
+           color: white;
+           padding: 10px 20px;
+           border-radius: 8px;
+           text-decoration: none;
+           font-family:'Anton', sans-serif;
+           font-size:20px;
+       ">
+       Add More?
+    </a>
+
+    <!-- Proceed to Checkout button -->
+    <a href="/checkout" 
+       style="
+           background: #388e3c;
+           color: white;
+           padding: 10px 20px;
+           border-radius: 8px;
+           text-decoration: none;
+           font-family:'Anton', sans-serif;
+           font-size:20px;
+       ">
+       Proceed to Checkout
+    </a>
+
+</div>
+
+{% else %}
+<p>Your cart is empty.</p>
+<a href="/menu">Go to Menu</a>
+</div>
+{% endif %}
