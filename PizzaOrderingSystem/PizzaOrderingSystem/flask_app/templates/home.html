@@ -48,7 +48,12 @@
             <a href="/" style="color:white; margin-right:20px; text-decoration:none;">Home</a>
             <a href="/menu" style="color:white; margin-right:20px; text-decoration:none;">View Menu</a>
             <a href="/promotions" style="color:white; margin-right:20px; text-decoration:none;">Current Promotions</a>
-            <a href="/admin" style="color:white; text-decoration:none;">Admin Login</a>
+            {% if session.get("admin") %}
+                <a href="/admin_dashboard" style="color:white; margin-right:20px; text-decoration:none;">Admin Dashboard</a>
+                <a href="/admin_logout" style="color:white; text-decoration:none;">Admin Logout</a>
+            {% else %}
+                <a href="/admin" style="color:white; text-decoration:none;">Admin Login</a>
+            {% endif %}
         </nav>
 
         <!-- HEADER -->

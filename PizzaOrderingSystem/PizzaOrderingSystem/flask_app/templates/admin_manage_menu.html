@@ -39,39 +39,54 @@
             <th>Actions</th>
         </tr>
 
-        {% for id, item in menu_items.items() %}
-        <tr>
-            <td>{{ item.id }}</td>
-            <td>{{ item.name }}</td>
-            <td>{{ item.category }}</td>
-            <td>${{ "%.2f"|format(item.price) }}</td>
-            <td>{{ "Yes" if item.active else "No" }}</td>
-            <td>
-                <a href="/admin/edit_item/{{ item.id }}" style="
-                    background:#1976d2;
-                    color:white;
-                    padding:6px 14px;
-                    border-radius:6px;
-                    text-decoration:none;
-                    font-size:18px;
-                ">
-                    Edit
-                </a>
+{% set last_category = "" %}
+{% for item in menu_items %}
 
-                <a href="/admin/delete_item/{{ item.id }}" style="
-                    background:#d32f2f;
-                    color:white;
-                    padding:6px 14px;
-                    border-radius:6px;
-                    text-decoration:none;
-                    font-size:18px;
-                    margin-left:8px;
-                ">
-                    Delete
-                </a>
+    {% if item.category|trim|lower != last_category %}
+        <tr style="background:#f0f0f0;">
+            <td colspan="6" style="
+                font-size:26px;
+                font-family:'Anton', sans-serif;
+                padding:10px;
+                text-align:left;
+                border-top:4px solid #000;
+            ">
+                {{ item.category|trim|capitalize }}
             </td>
         </tr>
-        {% endfor %}
+        {% set last_category = item.category|trim|lower %}
+    {% endif %}
+
+    <tr>
+        <td>{{ item.id }}</td>
+        <td>{{ item.name }}</td>
+        <td>{{ item.category }}</td>
+        <td>${{ "%.2f"|format(item.price) }}</td>
+        <td>{{ "Yes" if item.active else "No" }}</td>
+        <td>
+            <a href="/admin/edit_item/{{ item.id }}" style="
+                background:#1976d2;
+                color:white;
+                padding:6px 14px;
+                border-radius:6px;
+                text-decoration:none;
+                font-size:18px;
+            ">Edit</a>
+
+            <a href="/admin/delete_item/{{ item.id }}" style="
+                background:#d32f2f;
+                color:white;
+                padding:6px 14px;
+                border-radius:6px;
+                text-decoration:none;
+                font-size:18px;
+                margin-left:8px;
+            ">Delete</a>
+        </td>
+    </tr>
+
+{% endfor %}
+        
     </table>
 
     <!-- Return to Dashboard -->

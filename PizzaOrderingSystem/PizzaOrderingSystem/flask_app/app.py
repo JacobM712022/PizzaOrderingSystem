@@ -123,7 +123,21 @@ def manage_menu():
     if not session.get("admin"):
         return redirect("/admin")
 
-    return render_template("admin_manage_menu.html", menu_items=menu)
+    # Custom category order
+    category_order = {
+        "pizza": 1,
+        "sides": 2,
+        "dessert": 3,
+        "drinks": 4
+    }
+
+    # Sort by category priority, then by ID
+    sorted_items = sorted(
+        menu.values(),
+        key=lambda item: (category_order.get(item.category.strip().lower(), 999), item.id)
+    )
+
+    return render_template("admin_manage_menu.html", menu_items=sorted_items)
 
 @app.route("/admin/add_item", methods=["GET", "POST"])
 def add_item():
@@ -132,7 +146,7 @@ def add_item():
 
     if request.method == "POST":
         name = request.form["name"]
-        category = request.form["category"]
+        category = request.form["category"].strip().lower()
         price = float(request.form["price"])
         active = request.form["active"] == "yes"
 
@@ -192,6 +206,11 @@ def delete_item(item_id):
 
     # Show confirmation page
     return render_template("admin_delete_item.html", item=item)
+
+@app.route("/admin_logout")
+def admin_logout():
+    session.pop("admin", None)
+    return redirect("/admin")
 
 @app.route("/menu")
 def show_menu():
